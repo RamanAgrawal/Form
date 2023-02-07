@@ -1,27 +1,24 @@
-window.onload = function(e) {
+const saveData = (e) => {
     e.preventDefault();
+    let user=document.getElementById('users');
+    var name = document.getElementById('name').value;
+    // console.log(name);
+    var email = document.getElementById('email').value;
+    var phone=document.getElementById('phone').value
+    class Myobj{
+        constructor(name ,email,phone){
+        this.name=name;
+        this.email=email
+        this.phoneNo=phone
+        }
+    } 
+    let tempObj=new Myobj(name,email,phone)
+    let myobjnew = JSON.stringify(tempObj);
+    localStorage.setItem(`${name}`, myobjnew)
 
-    // Check for LocalStorage support.
-    if (localStorage) {
-
-        // Add an event listener for form submissions
-        document.getElementById('my-form').addEventListener('submit', function (e) {
-
-            // e.preventDefault();
-            var name = document.getElementById('name').value;
-            // console.log(name);
-            var email = document.getElementById('email').value;
-            let myobj = {
-                name: `${name}`,
-                email: `${email}`
-            }
-            let myobjnew = JSON.stringify(myobj);
-            localStorage.setItem('myobj', myobjnew)
-            // Saving in localStorage.
-            // localStorage.setItem('name', name);
-            // localStorage.setItem('email', email);
-        });
-
-    }
-    }
-}
+    let newlistitem=document.createElement('li');
+    let text=document.createTextNode(`${name}-${email}-${phone}`)
+    newlistitem.appendChild(text)
+    user.appendChild(newlistitem)
+    document.getElementById("my-form").reset();
+};
